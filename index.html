@@ -5,145 +5,207 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pravin FX | Video Editing & VFX</title>
 
-<!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
 <style>
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,Arial}
-body{background:#0b0b0b;color:#fff;overflow-x:hidden}
+body{
+  color:#fff;
+  background:linear-gradient(135deg,#050505,#0c1b1a,#050505);
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
+}
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 
-/* ================= GLITCH INTRO ================= */
-#glitch-intro{
-  position:fixed;inset:0;background:#000;
+/* INTRO */
+#intro{
+  position:fixed;inset:0;
+  background:#000;
   display:flex;align-items:center;justify-content:center;
-  z-index:9999
+  z-index:9999;
 }
-.glitch{
-  font-size:4rem;font-weight:800;letter-spacing:4px;
-  position:relative;color:#fff;
-  animation:glitch-skew 1.5s infinite alternate-reverse
+#intro h1{
+  font-size:4rem;color:#00ffd5;
+  animation:pulse 1.5s infinite alternate;
 }
-.glitch:before,.glitch:after{
-  content:attr(data-text);
-  position:absolute;left:0;width:100%
-}
-.glitch:before{
-  color:#00ffd5;animation:glitch-top 1.2s infinite
-}
-.glitch:after{
-  color:#ff005a;animation:glitch-bottom 1.4s infinite
-}
-@keyframes glitch-top{
-  0%{clip-path:inset(0 0 85% 0);transform:translate(-3px,-3px)}
-  50%{clip-path:inset(0 0 40% 0);transform:translate(3px,2px)}
-  100%{clip-path:inset(0 0 60% 0);transform:translate(-2px,1px)}
-}
-@keyframes glitch-bottom{
-  0%{clip-path:inset(70% 0 0 0);transform:translate(3px,3px)}
-  50%{clip-path:inset(30% 0 0 0);transform:translate(-3px,-2px)}
-  100%{clip-path:inset(50% 0 0 0);transform:translate(2px,-1px)}
-}
-@keyframes glitch-skew{
-  0%{transform:skew(0deg)}
-  50%{transform:skew(3deg)}
-  100%{transform:skew(-3deg)}
+@keyframes pulse{
+  from{opacity:.5;transform:scale(.95)}
+  to{opacity:1;transform:scale(1)}
 }
 
-/* ================= HERO ================= */
+/* NAV */
+nav{
+  position:fixed;top:20px;left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(12px);
+  padding:12px 30px;
+  border-radius:40px;
+  display:flex;gap:30px;
+  z-index:1000;
+}
+nav a{
+  color:#fff;text-decoration:none;
+  transition:.3s;
+}
+nav a:hover{color:#00ffd5}
+
+/* HERO */
 .hero{
   height:100vh;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
-  background:radial-gradient(circle,#111,#000)
 }
 .hero h1{font-size:3.8rem;color:#00ffd5}
-.hero p{margin:15px 0;opacity:.9}
+.hero p{margin:15px 0}
 .btn{
-  display:inline-block;padding:12px 35px;
-  background:#00ffd5;color:#000;
-  border-radius:30px;text-decoration:none;font-weight:bold
+  display:inline-block;
+  padding:12px 35px;
+  background:#00ffd5;
+  color:#000;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
+  margin:10px;
 }
 
-/* ================= SECTIONS ================= */
-.section{padding:80px 20px;max-width:1100px;margin:auto}
-.title{text-align:center;color:#00ffd5;font-size:2.2rem;margin-bottom:40px}
+/* SECTIONS */
+.section{padding:90px 20px;max-width:1200px;margin:auto}
+.title{text-align:center;font-size:2.4rem;color:#00ffd5;margin-bottom:40px}
 
 /* SERVICES */
 .cards{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:25px
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
 }
 .card{
-  background:#141414;padding:30px;border-radius:15px;
-  text-align:center;transition:.4s
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(0,255,213,.3);
+  padding:30px;
+  border-radius:18px;
+  text-align:center;
+  transition:.4s;
 }
 .card:hover{
-  transform:translateY(-10px) scale(1.05);
-  box-shadow:0 20px 40px rgba(0,255,213,.25)
+  transform:translateY(-12px);
+  box-shadow:0 0 30px rgba(0,255,213,.4);
 }
 
-/* VIDEO PORTFOLIO */
+/* VIDEO */
 .video-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
 }
 .video-card{
-  position:relative;overflow:hidden;border-radius:20px;
-  background:#000;cursor:pointer
+  border-radius:20px;
+  overflow:hidden;
+  cursor:pointer;
+  position:relative;
 }
-.video-card video{
-  width:100%;height:100%;object-fit:cover;
-  transition:.5s
+.video-card video{width:100%}
+.video-card::after{
+  content:"▶ PLAY";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.4);
+  color:#00ffd5;
+  font-size:1.5rem;
 }
-.video-card:hover video{transform:scale(1.1)}
-.overlay{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;font-weight:bold;
-  color:#00ffd5;background:rgba(0,0,0,.4);
-  opacity:0;transition:.4s
+
+/* FULLSCREEN VIDEO */
+#popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
 }
-.video-card:hover .overlay{opacity:1}
+#popup video{
+  width:90%;
+  max-width:900px;
+}
+#popup span{
+  position:absolute;
+  top:30px;right:40px;
+  font-size:30px;
+  cursor:pointer;
+}
 
 /* PRICING */
-.price-card{
-  background:#141414;padding:40px;border-radius:20px;
-  max-width:400px;margin:auto;text-align:center
+.pricing{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
 }
-.price-card span{font-size:2rem;color:#00ffd5;display:block;margin:15px 0}
+.price{
+  background:rgba(255,255,255,.05);
+  border:1px solid #00ffd5;
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  cursor:pointer;
+  transition:.4s;
+}
+.price:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 40px rgba(0,255,213,.5);
+}
+.price span{
+  display:block;
+  font-size:2rem;
+  color:#00ffd5;
+  margin:10px 0;
+}
 
-/* FOOTER */
-footer{text-align:center;padding:20px;background:#000;font-size:.9rem}
-
-/* MOBILE */
-@media(max-width:600px){
-  .glitch{font-size:2.6rem}
-  .hero h1{font-size:2.8rem}
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:25px;right:25px;
+  width:55px;height:55px;
+  background:#25D366;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  color:#fff;
+  text-decoration:none;
+  z-index:999;
 }
 </style>
 </head>
 
 <body>
 
-<!-- GLITCH INTRO -->
-<div id="glitch-intro">
-  <div class="glitch" data-text="Pravin FX">Pravin FX</div>
-</div>
+<div id="intro"><h1>Pravin FX</h1></div>
 
-<!-- HERO -->
+<nav>
+  <a href="#services">Services</a>
+  <a href="#work">Work</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#contact">Contact</a>
+</nav>
+
 <section class="hero">
   <div>
     <h1>Pravin FX</h1>
     <p>Professional Video Editing & VFX Services</p>
-    <a href="#contact" class="btn">Hire Me</a>
+    <a href="#pricing" class="btn">View Pricing</a>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="section">
+<section class="section" id="services">
   <h2 class="title">Services</h2>
   <div class="cards">
     <div class="card">🎬 Video Editing</div>
@@ -155,72 +217,71 @@ footer{text-align:center;padding:20px;background:#000;font-size:.9rem}
   </div>
 </section>
 
-<!-- VIDEO PORTFOLIO -->
-<section class="section">
+<section class="section" id="work">
   <h2 class="title">Video Portfolio</h2>
   <div class="video-grid">
-
-    <div class="video-card">
-      <video src="video1.mp4" muted loop></video>
-      <div class="overlay">Instagram Reel</div>
+    <div class="video-card" onclick="openVideo('video1.mp4')">
+      <video src="video1.mp4"></video>
     </div>
-
-    <div class="video-card">
-      <video src="video2.mp4" muted loop></video>
-      <div class="overlay">YouTube Edit</div>
+    <div class="video-card" onclick="openVideo('video2.mp4')">
+      <video src="video2.mp4"></video>
     </div>
-
-    <div class="video-card">
-      <video src="video3.mp4" muted loop></video>
-      <div class="overlay">Motion Graphics</div>
-    </div>
-
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="section">
+<section class="section" id="pricing">
   <h2 class="title">Pricing</h2>
-  <div class="price-card">
-    <h3>Monthly Package</h3>
-    <span>₹7,000 / Month</span>
-    <p>Reels • YouTube • Motion Graphics • VFX • Ads</p>
+  <div class="pricing">
+    <div class="price" onclick="wa('Daily Reels – ₹7000')">
+      <h3>Daily Reels</h3>
+      <span>₹7,000</span>
+      <p>1 Reel Per Day</p>
+    </div>
+    <div class="price" onclick="wa('YouTube Package – ₹14000')">
+      <h3>YouTube Package</h3>
+      <span>₹14,000</span>
+      <p>YouTube Video Editing</p>
+    </div>
+    <div class="price" onclick="wa('All Services – ₹25000')">
+      <h3>All Services</h3>
+      <span>₹25,000</span>
+      <p>Reels + YouTube + VFX + Ads</p>
+    </div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="section" id="contact">
   <h2 class="title">Contact</h2>
-  <p style="text-align:center">Instagram: <b>@PravinFX</b></p>
-  <p style="text-align:center">Email: <b>pravinmandloi175@gmail.com</b></p>
+  <p style="text-align:center">
+    <a href="https://wa.me/916266285224" style="color:#00ffd5;text-decoration:none">
+      WhatsApp: 6266285224
+    </a>
+  </p>
 </section>
 
-<footer>© 2026 Pravin FX | All Rights Reserved</footer>
+<a class="whatsapp" href="https://wa.me/916266285224">💬</a>
+
+<!-- VIDEO POPUP -->
+<div id="popup">
+  <span onclick="closeVideo()">✕</span>
+  <video controls id="popupVideo"></video>
+</div>
 
 <script>
-/* GLITCH INTRO EXIT */
-setTimeout(()=>{
-  document.getElementById("glitch-intro").style.opacity="0";
-  setTimeout(()=>document.getElementById("glitch-intro").remove(),1000);
-},3000);
+setTimeout(()=>intro.style.display="none",2000);
 
-/* GSAP SCROLL ANIMATION */
-gsap.registerPlugin(ScrollTrigger);
-gsap.utils.toArray(".section").forEach(sec=>{
-  gsap.from(sec,{
-    scrollTrigger:{trigger:sec,start:"top 80%"},
-    opacity:0,y:80,duration:1
-  })
-});
-
-/* VIDEO HOVER PLAY */
-document.querySelectorAll(".video-card").forEach(card=>{
-  const v=card.querySelector("video");
-  card.onmouseenter=()=>v.play();
-  card.onmouseleave=()=>{
-    v.pause();v.currentTime=0;
-  };
-});
+function openVideo(src){
+  popup.style.display="flex";
+  popupVideo.src=src;
+  popupVideo.play();
+}
+function closeVideo(){
+  popupVideo.pause();
+  popup.style.display="none";
+}
+function wa(service){
+  window.open("https://wa.me/916266285224?text=Hi%20I%20am%20interested%20in%20"+encodeURIComponent(service));
+}
 </script>
 
 </body>
